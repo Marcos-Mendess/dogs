@@ -3,28 +3,37 @@ import { useState } from "react";
 import { ReactComponent as Enviar } from "../../Assets/enviar.svg";
 import { COMMENT_POST } from "../../Hooks/api";
 import useFetch from "../../Hooks/UseFetch";
-function PhotoCommentsForm({ id }) {
+import Error from "../Helper/Error";
+import styles from "./PhotoCommentsForm.module.css";
+function PhotoCommentsForm({ id, setComments }) {
   const { request, error } = useFetch();
   const [comment, setComment] = useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
     const { url, options } = COMMENT_POST(id, { comment });
-    await request(url, options);
+    const { response, json } = await request(url, options);
+    console.log(json);
+    if (response.ok) {
+      setComment("");
+      setComments((comments) => [...comments, json]);
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <textarea
+        className={styles.textarea}
         placeholder="Comente..."
         id="comment"
         name="comment"
         value={comment}
         onChange={({ target }) => setComment(target.value)}
       />
-      <button>
+      <button className={styles.button}>
         <Enviar />
       </button>
+      <Error error={error} />
     </form>
   );
 }
