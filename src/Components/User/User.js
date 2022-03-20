@@ -11,7 +11,6 @@ import Head from "../Helper/Head";
 
 const User = () => {
   const { data } = useContext(UserContext);
-  console.log(data);
   return (
     <section className="container">
       <Head title="Minha conta" />
