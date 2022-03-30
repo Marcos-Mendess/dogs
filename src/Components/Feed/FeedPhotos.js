@@ -7,7 +7,6 @@ import FeedPhotosItem from "./FeedPhotosItem";
 import styles from "./FeedPhotos.module.css";
 
 const FeedPhotos = ({ page, user, setModalPhoto, setInfinite }) => {
-  console.log(user);
   const { data, loading, error, request } = useFetch();
   useEffect(() => {
     async function fetchPhotos() {
