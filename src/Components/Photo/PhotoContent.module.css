@@ -50,13 +50,13 @@
   .photo {
     height: auto;
     max-height: calc(100vh-4rem);
-    overflow-y: auto;
+    overflow-y: scroll;
     grid-template-columns: minmax(20rem, 40rem);
   }
 
-  .img,
-  img {
-    grid-row: 1;
+  .img {
+    grid-row: 1/2;
+    width: 100%;
   }
 }
 
